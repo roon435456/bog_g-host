@@ -3,25 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bog Studio | Vercel + GitHub Hoster</title>
+    <title>Bog Studio | Vercel Hosting</title>
     <style>
         :root {
+            --bog-black: #0a0d0a;
             --bog-dark: #1a241a;
             --bog-moss: #2d3d2d;
             --bog-green: #4f6b4f;
             --bog-leaf: #78a85d;
-            --vine-accent: #3a5335;
+            --vine-color: #3a5335;
         }
 
         body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bog-dark);
+            background-color: var(--bog-black);
             color: #e0eadd;
-            height: 100vh;
             overflow: hidden;
         }
+
+        /* --- UIVERSE ADAPTATION (BOG GREEN VERSION) --- */
+        .flex { display: flex; align-items: center; gap: 8px; }
+
+        .outer-cont {
+            padding: 12px 24px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            /* Changed from neon to Bog Greens */
+            background: linear-gradient(90deg, #3a5335, #78a85d, #4f6b4f);
+            border-radius: 12px;
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow:
+                inset 0px 0px 5px #ffffff44,
+                inset 0px 35px 30px #000,
+                0px 5px 10px #000000cc;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .outer-cont::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            border-radius: 12px;
+            filter: blur(0);
+            z-index: -1;
+            background: conic-gradient(
+                #00000000 80deg,
+                var(--bog-leaf),
+                var(--vine-color),
+                var(--bog-green),
+                #00000000 280deg
+            );
+            transition: all 0.3s ease;
+        }
+
+        .outer-cont:hover::before { filter: blur(15px); }
 
         /* --- LANDING PAGE --- */
         #landing-page {
@@ -30,219 +72,330 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: radial-gradient(circle at center, #2d3d2d 0%, #1a241a 100%);
+            background: radial-gradient(circle, var(--bog-dark) 0%, var(--bog-black) 100%);
             text-align: center;
+            padding: 20px;
+        }
+
+        #landing-page h1 {
+            font-size: 3rem;
+            color: var(--bog-leaf);
+            margin-bottom: 10px;
         }
 
         .vine-decoration {
             position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
-            height: 50px;
-            background: linear-gradient(to bottom, transparent, transparent);
-            border-top: 8px solid var(--vine-accent);
-            border-radius: 0 0 50% 50%;
+            height: 100px;
+            background-image: url('https://www.transparenttextures.com/patterns/leaf.png');
+            opacity: 0.1;
+            pointer-events: none;
         }
 
-        /* Uiverse UI Modified for Bog Green */
-        .flex { display: flex; align-items: center; gap: 8px; }
-        
-        .outer-cont {
-            padding: 15px 30px;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            position: relative;
-            background: linear-gradient(90deg, #2d4d2d, #4f6b4f, #1a2e1a);
-            border-radius: 12px;
-            color: #fff;
-            transition: all 0.3s ease;
-            box-shadow: inset 0px 0px 5px #ffffff44, inset 0px 35px 30px #000000aa, 0px 5px 15px #000;
-            text-shadow: 1px 1px 2px #000;
-            z-index: 10;
-        }
-
-        .outer-cont::before {
-            content: "🌿";
-            position: absolute;
-            left: -10px;
-            top: -10px;
-            font-size: 20px;
-            filter: blur(0);
-            z-index: -1;
-            transition: all 0.3s ease;
-        }
-
-        .outer-cont:hover { transform: scale(1.05); }
-
-        /* --- STUDIO INTERFACE --- */
-        #studio-workspace {
-            display: none; /* Hidden by default */
-            grid-template-columns: 250px 1fr;
-            height: 100vh;
-            border: 10px solid var(--vine-accent);
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        #studio-workspace::after {
-            content: "🍃";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 30px;
-            opacity: 0.6;
-        }
-
-        .sidebar {
+        #site-name-input {
             background: var(--bog-moss);
-            border-right: 2px solid var(--bog-dark);
-            padding: 20px;
+            border: 2px solid var(--vine-color);
+            color: var(--bog-leaf);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            width: 300px;
+            text-align: center;
+            outline: none;
+        }
+
+        /* --- STUDIO AREA --- */
+        #studio {
+            display: none;
+            grid-template-columns: 280px 1fr;
+            height: 100vh;
+        }
+
+        /* Sidebar with Vines */
+        .sidebar {
+            background: var(--bog-dark);
+            border-right: 2px solid var(--vine-color);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .sidebar::after {
+            content: "🌿";
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
         }
 
         .file-item {
             padding: 10px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 5px;
+            margin-bottom: 5px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9rem;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .file-item:hover { background: var(--bog-leaf); color: white; }
+        .file-item:hover { background: var(--bog-moss); }
 
-        .editor-area {
-            background: #111;
+        .upload-btn {
+            margin-top: auto;
+            padding: 10px;
+            background: var(--vine-color);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* Editor Area */
+        .main-view {
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            background: var(--bog-black);
         }
 
-        textarea {
+        .toolbar {
+            height: 60px;
+            background: var(--bog-moss);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--vine-color);
+        }
+
+        #editor {
+            flex: 1;
             width: 100%;
-            height: 100%;
             background: transparent;
-            color: #78a85d;
+            color: #c5d1c5;
+            padding: 20px;
             border: none;
-            outline: none;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Consolas', 'Monaco', monospace;
             font-size: 16px;
+            outline: none;
             resize: none;
         }
 
-        /* Modals */
-        #create-modal {
+        #media-preview {
+            flex: 1;
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bog-moss);
-            padding: 30px;
-            border-radius: 15px;
-            border: 3px solid var(--bog-leaf);
-            z-index: 100;
-            text-align: center;
+            justify-content: center;
+            align-items: center;
+            background: #000;
         }
 
-        input {
-            padding: 10px;
-            border-radius: 5px;
+        #media-preview img, #media-preview video {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 20px var(--bog-leaf);
+        }
+
+        .publish-btn {
+            background: #2ecc71;
+            color: white;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
             border: none;
-            margin-bottom: 15px;
-            width: 80%;
+            cursor: pointer;
         }
 
-        .overlay {
-            display: none;
+        .publish-btn:hover { background: #27ae60; }
+
+        /* Status Toast */
+        #status {
             position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            z-index: 90;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bog-leaf);
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none;
+            animation: slideUp 0.3s ease;
         }
+
+        @keyframes slideUp { from { transform: translateY(100px); } to { transform: translateY(0); } }
     </style>
 </head>
 <body>
 
+    <div class="vine-decoration"></div>
+
     <div id="landing-page">
-        <div class="vine-decoration"></div>
         <h1>Bog Studio</h1>
-        <p>Deploy your swamp to Vercel & GitHub</p>
-        <br>
-        <button class="outer-cont flex" onclick="openModal()">
+        <p style="margin-bottom: 30px; opacity: 0.8;">Rooted hosting for your GitHub projects.</p>
+        
+        <input type="text" id="site-name-input" placeholder="enterthename" maxlength="20">
+        
+        <button class="outer-cont flex" onclick="createSite()">
             <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none">
-                  <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
+                    <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
                 </g>
             </svg>
-            Create New Site
+            Create Studio
         </button>
     </div>
 
-    <div class="overlay" id="overlay"></div>
-    <div id="create-modal">
-        <h3>Name your Swamp</h3>
-        <input type="text" id="site-name" placeholder="lowercaseonly" oninput="validateInput(this)">
-        <br>
-        <button class="outer-cont" onclick="launchStudio()">Initialize Site</button>
+    <div id="studio">
+        <div class="sidebar">
+            <h2 id="display-site-name" style="color: var(--bog-leaf);">bog-site</h2>
+            <p style="font-size: 0.8rem; opacity: 0.5;">GITHUB REPO: CONNECTED</p>
+            
+            <ul class="file-list" id="file-list">
+                </ul>
+
+            <label class="upload-btn">
+                <span>Upload Assets 🍃</span>
+                <input type="file" id="file-upload" hidden multiple onchange="handleUpload(this)">
+            </label>
+        </div>
+
+        <div class="main-view">
+            <div class="toolbar">
+                <span id="current-filename">Editing: index.html</span>
+                <button class="publish-btn" onclick="publish()">Publish to Vercel</button>
+            </div>
+            
+            <textarea id="editor"></textarea>
+            
+            <div id="media-preview">
+                </div>
+        </div>
     </div>
 
-    <div id="studio-workspace">
-        <div class="sidebar">
-            <h3 id="display-site-name">project-name</h3>
-            <hr style="width:100%; border: 1px solid var(--bog-dark)">
-            <div class="file-item" onclick="loadFile('index.html')">📄 index.html</div>
-            <div class="file-item">📁 Upload File (MP3/MP4/PNG)</div>
-            <div style="margin-top: auto; font-size: 12px; color: var(--bog-leaf);">Connected to Vercel</div>
-        </div>
-        <div class="editor-area">
-            <div id="file-title" style="margin-bottom: 10px; color: var(--bog-leaf);">Editing: index.html</div>
-            <textarea id="editor"><!DOCTYPE html>
-<html>
-<head>
-    <title>My Bog Site</title>
-</head>
-<body>
-    <h1>Welcome to the Swamp</h1>
-</body>
-</html></textarea>
-        </div>
-    </div>
+    <div id="status">Deploying to Vercel... 🌿</div>
 
     <script>
-        const landing = document.getElementById('landing-page');
-        const studio = document.getElementById('studio-workspace');
-        const modal = document.getElementById('create-modal');
-        const overlay = document.getElementById('overlay');
-        const siteInput = document.getElementById('site-name');
+        let siteName = "";
+        let files = {
+            "index.html": {
+                type: 'text',
+                content: '<!DOCTYPE html>\n<html>\n<head>\n  <title>Welcome</title>\n</head>\n<body style="background: #1a241a; color: #78a85d;">\n  <h1>Welcome to my Bog site!</h1>\n</body>\n</html>'
+            }
+        };
+        let activeFile = "index.html";
 
-        function openModal() {
-            modal.style.display = 'block';
-            overlay.style.display = 'block';
-        }
+        // Restriction: Only letters
+        document.getElementById('site-name-input').addEventListener('input', function(e) {
+            this.value = this.value.toLowerCase().replace(/[^a-z]/g, '');
+        });
 
-        // Restriction: no spaces, capitals, unicodes, special characters
-        function validateInput(input) {
-            input.value = input.value.replace(/[^a-z]/g, '');
-        }
-
-        function launchStudio() {
-            if(siteInput.value.length < 1) return alert("Please name your site!");
+        function createSite() {
+            const input = document.getElementById('site-name-input').value;
+            if(!input) return alert("Please name your swamp!");
             
-            document.getElementById('display-site-name').innerText = siteInput.value + ".bog";
+            siteName = input;
+            document.getElementById('display-site-name').innerText = siteName;
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('studio').style.display = 'grid';
             
-            // Transition
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-            landing.style.display = 'none';
-            studio.style.display = 'grid';
+            renderFileList();
+            openFile('index.html');
         }
 
-        function loadFile(name) {
-            document.getElementById('file-title').innerText = "Editing: " + name;
+        function renderFileList() {
+            const list = document.getElementById('file-list');
+            list.innerHTML = "";
+            Object.keys(files).forEach(filename => {
+                const li = document.createElement('li');
+                li.className = "file-item";
+                li.innerHTML = `<span>📄</span> ${filename}`;
+                li.onclick = () => openFile(filename);
+                list.appendChild(li);
+            });
+        }
+
+        function openFile(name) {
+            // Save current work
+            if (files[activeFile].type === 'text') {
+                files[activeFile].content = document.getElementById('editor').value;
+            }
+
+            activeFile = name;
+            document.getElementById('current-filename').innerText = `Viewing: ${name}`;
+            
+            const file = files[name];
+            const editor = document.getElementById('editor');
+            const preview = document.getElementById('media-preview');
+
+            if (file.type === 'text') {
+                editor.style.display = "block";
+                preview.style.display = "none";
+                editor.value = file.content;
+            } else {
+                editor.style.display = "none";
+                preview.style.display = "flex";
+                preview.innerHTML = "";
+                
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = file.content;
+                    preview.appendChild(img);
+                } else if (file.type.startsWith('video/')) {
+                    const vid = document.createElement('video');
+                    vid.src = file.content;
+                    vid.controls = true;
+                    preview.appendChild(vid);
+                } else if (file.type.startsWith('audio/')) {
+                    const aud = document.createElement('audio');
+                    aud.src = file.content;
+                    aud.controls = true;
+                    preview.appendChild(aud);
+                }
+            }
+        }
+
+        function handleUpload(input) {
+            const uploadedFiles = Array.from(input.files);
+            uploadedFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    files[file.name] = {
+                        type: file.type || 'text',
+                        content: e.target.result
+                    };
+                    renderFileList();
+                };
+
+                if (file.type.startsWith('text/') || file.name.endsWith('.html') || file.name.endsWith('.css')) {
+                    files[file.name] = { type: 'text' };
+                    reader.readAsText(file);
+                } else {
+                    reader.readAsDataURL(file); // For media
+                }
+            });
+        }
+
+        function publish() {
+            const status = document.getElementById('status');
+            status.style.display = "block";
+            status.innerText = "Connecting to GitHub & Vercel... 🌿";
+            
+            setTimeout(() => {
+                status.innerText = "Site live at bog-g-host.vercel.app/" + siteName;
+                setTimeout(() => {
+                    window.open(`https://bog-g-host.vercel.app/${siteName}`, '_blank');
+                }, 1000);
+            }, 2000);
         }
     </script>
 </body>
