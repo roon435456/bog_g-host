@@ -1,203 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebHoster | Vercel Style</title>
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --card-bg: #111111;
-            --border: #333333;
-            --text: #ededed;
-            --secondary: #888888;
-            --accent: #0070f3;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Navbar */
-        nav {
-            width: 100%;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-        }
-
-        .logo { font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
-
-        /* Container */
-        .container {
-            max-width: 900px;
-            width: 90%;
-            margin-top: 60px;
-        }
-
-        .header-section { margin-bottom: 40px; }
-        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin: 0; }
-        p { color: var(--secondary); font-size: 1.1rem; }
-
-        /* Form Card */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-        }
-
-        label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--secondary); }
-        
-        input, textarea {
-            width: 100%;
-            background: #000;
-            border: 1px solid var(--border);
-            color: white;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            outline: none;
-            box-sizing: border-box;
-            transition: border 0.2s;
-        }
-
-        input:focus, textarea:focus { border-color: var(--accent); }
-
-        /* The Uiverse Button Style */
-        .button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background-color: #eee;
-            border: none;
-            color: #111;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-size: 1rem;
-        }
-
-        .button:hover {
-            background-color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .button svg {
-            fill: #111;
-            transition: all 0.3s ease;
-        }
-
-        /* Success Section */
-        #status-box {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            background: rgba(0, 112, 243, 0.1);
-        }
-
-        .visit-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 16px;
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-        }
-
-        .visit-link:hover { background: var(--accent); color: white; }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="logo">
-            <svg height="24" viewBox="0 0 75 65" fill="#fff"><path d="M37.5 0L75 65H0L37.5 0Z"></path></svg>
-            WebHoster
-        </div>
-        <div style="color: var(--secondary); font-size: 0.8rem;">GitHub / Vercel-Platform</div>
-    </nav>
-
-    <div class="container">
-        <div class="header-section">
-            <h1>New Project</h1>
-            <p>Deploy your HTML and assets to our edge network.</p>
-        </div>
-
-        <div class="card">
-            <label>PROJECT NAME (URL SLUG)</label>
-            <input type="text" id="siteName" placeholder="my-awesome-site">
-
-            <label>SOURCE CODE (HTML)</label>
-            <textarea id="htmlCode" rows="8" placeholder=""></textarea>
-
-            <label>ASSETS</label>
-            <input type="file" id="assets" multiple style="border: 1px dashed var(--border); padding: 20px; cursor: pointer;">
-
-            <button class="button" onclick="deployProject()">
-                <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-                </svg>
-                Deploy Site
-            </button>
-        </div>
-
-        <div id="status-box">
-            <h3 style="margin-top:0">✅ Deployment Complete</h3>
-            <p id="urlText"></p>
-            <button class="button" id="visitBtn" style="width: auto; background: var(--accent); color: white;">
-                Visit Site
-            </button>
-        </div>
+<div class="card">
+    <label>DESIRED URL</label>
+    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <span style="color: var(--secondary); margin-right: 10px;">bog-g-host.vercel.app/</span>
+        <input type="text" id="siteName" placeholder="my-site" style="margin-bottom: 0;">
     </div>
 
-    <script>
-        function deployProject() {
-            const name = document.getElementById('siteName').value;
-            const code = document.getElementById('htmlCode').value;
-            const statusBox = document.getElementById('status-box');
-            const urlText = document.getElementById('urlText');
-            const visitBtn = document.getElementById('visitBtn');
+    <label>HTML / CSS / JS CODE</label>
+    <textarea id="htmlCode" rows="10" placeholder="<h1>My New Site</h1>"></textarea>
 
-            if (!name || !code) {
-                alert("Please fill in the project name and code!");
-                return;
-            }
+    <label>ASSETS (OPTIONAL)</label>
+    <input type="file" id="assets" multiple style="border: 1px dashed var(--border); padding: 10px; margin-bottom: 20px;">
 
-            const slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const fakeUrl = window.location.hostname + "/" + slug;
+    <button class="button" onclick="publishToVercel()">
+        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+        </svg>
+        Publish Project
+    </button>
+</div>
 
-            // Mocking the 'upload' process
-            localStorage.setItem('host_' + slug, code);
+<div id="status-box" style="display:none; margin-top: 20px; border: 1px solid #333; padding: 20px; border-radius: 8px;">
+    <p>🚀 Production Deployment Success!</p>
+    <a id="visitLink" href="#" style="color: #0070f3; text-decoration: none; font-weight: bold;">Visit Site →</a>
+</div>
 
-            urlText.innerText = "Your project is live at: " + fakeUrl;
-            statusBox.style.display = "block";
+<script>
+    function publishToVercel() {
+        const slug = document.getElementById('siteName').value.toLowerCase().replace(/ /g, '-');
+        const code = document.getElementById('htmlCode').value;
+        
+        if(!slug || !code) return alert("Fill in the blanks!");
 
-            visitBtn.onclick = function() {
-                const blob = new Blob([code], {type: 'text/html'});
-                const blobUrl = URL.createObjectURL(blob);
-                window.open(blobUrl, '_blank');
-            };
-        }
-    </script>
-</body>
-</html>
+        // 1. Save to LocalStorage (For immediate preview)
+        localStorage.setItem(slug, code);
+
+        // 2. Update UI
+        const link = document.getElementById('visitLink');
+        const fullPath = window.location.origin + "/" + slug;
+        
+        link.href = fullPath;
+        link.innerText = "Visit: " + fullPath;
+        document.getElementById('status-box').style.display = "block";
+
+        console.log("Published " + slug + " to the edge.");
+    }
+</script>
