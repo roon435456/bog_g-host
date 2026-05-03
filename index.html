@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bolt Host — Instant HTML Hosting</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('landing')">
+    <svg viewBox="0 0 16 16" fill="currentColor" width="22" height="22">
+      <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+    </svg>
+    Bolt<span>Host</span>
+  </a>
+  <div class="nav-links">
+    <button class="button ghost" onclick="showPage('landing')">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5v-5h3v5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146z"/></svg>
+      home
+    </button>
+    <button class="button" onclick="showPage('dashboard')">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+      </svg>
+      launch dashboard
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════ LANDING ══════════════════ -->
+<div id="landing">
+
+  <section class="hero">
+    <div class="hero-badge">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="11" height="11">
+        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+      </svg>
+      instant html hosting
+    </div>
+    <h1>Host your site<br>at <em>lightning</em> speed</h1>
+    <p>Upload your HTML files, pick a name, and go live in seconds. No servers, no config, no nonsense.</p>
+
+    <div class="url-demo">
+      <span class="dim">https://</span>
+      <span class="domain">bolthost.vercel.app</span>
+      <span class="dim">/</span>
+      <span class="bright">your-site</span>
+    </div>
+
+    <div class="hero-btns">
+      <button class="button" onclick="showPage('dashboard')">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+          <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+        </svg>
+        get started free
+      </button>
+      <a class="button ghost" href="https://github.com" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        view on github
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="features">
+    <div class="section-label">⚡ features</div>
+    <h2 style="font-size:36px;font-weight:800;letter-spacing:-0.03em;max-width:500px;line-height:1.1;">Everything you need, nothing you don't</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/></svg>
+        </div>
+        <h3>Drag & drop upload</h3>
+        <p>Upload HTML, CSS, JS, and images by dragging them straight onto the page. No CLI required.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/></svg>
+        </div>
+        <h3>Custom URLs</h3>
+        <p>Every site gets its own URL: <code style="font-family:monospace;font-size:12px;color:var(--accent2);">bolthost.vercel.app/your-name</code></p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        </div>
+        <h3>Safe & moderated</h3>
+        <p>Every site goes through a simple content agreement before going live. No harmful content allowed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg>
+        </div>
+        <h3>Instant deploy</h3>
+        <p>Sites go live in seconds. No build steps, no waiting, no config files to mess with.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="how-it-works">
+    <div class="section-label">⚡ how it works</div>
+    <h2 style="font-size:36px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;">Three steps to live</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Name your site</h4>
+        <p>Pick a name and we'll generate a unique URL for it automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Upload your files</h4>
+        <p>Drag in your HTML, CSS, JS and image files. Or just an index.html to start.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Agree & publish</h4>
+        <p>Read the short content rules, agree, and hit publish. You're live.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Share your link</h4>
+        <p>Copy your URL and share it anywhere. It's yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <div style="text-align:center;padding:80px 48px;">
+    <h2 style="font-size:40px;font-weight:800;letter-spacing:-0.04em;margin-bottom:24px;">Ready to ship?</h2>
+    <button class="button" onclick="showPage('dashboard')" style="padding:14px 32px;font-size:14px;">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16">
+        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+      </svg>
+      create your first site
+    </button>
+  </div>
+
+  <footer>
+    <span>⚡ BoltHost — built on Vercel</span>
+    <span>HTML hosting, zero nonsense</span>
+  </footer>
+
+</div><!-- /landing -->
+
+<!-- ══════════════════ DASHBOARD ══════════════════ -->
+<div id="dashboard">
+  <div class="dash-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-label">menu</div>
+      <a class="sidebar-link active" onclick="showTab('sites');document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.remove('active'));this.classList.add('active')">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13z"/></svg>
+        my sites
+      </a>
+      <a class="sidebar-link" onclick="showTab('create');document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.remove('active'));this.classList.add('active')">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
+        new site
+      </a>
+      <a class="sidebar-link" onclick="showTab('upload');document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.remove('active'));this.classList.add('active')">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/></svg>
+        upload files
+      </a>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dash-main">
+      <div class="dash-header">
+        <h2>Dashboard</h2>
+        <button class="button" onclick="showTab('create');document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.remove('active'));document.querySelectorAll('.sidebar-link')[1].classList.add('active')">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
+          new site
+        </button>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">total sites</div>
+          <div class="stat-value yellow" id="stat-sites">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">live now</div>
+          <div class="stat-value green" id="stat-live">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">your domain</div>
+          <div class="stat-value accent" style="font-size:16px;margin-top:4px;">bolthost.vercel.app</div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <div class="tab active" data-tab="sites">my sites</div>
+        <div class="tab" data-tab="create">create</div>
+        <div class="tab" data-tab="upload">upload</div>
+      </div>
+
+      <!-- TAB: SITES -->
+      <div id="tab-sites" class="tab-panel">
+        <div class="sites-grid" id="sites-grid"></div>
+      </div>
+
+      <!-- TAB: CREATE -->
+      <div id="tab-create" class="tab-panel" style="display:none;">
+        <div class="create-panel">
+          <h3 style="font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-0.02em;">Create a new site</h3>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:28px;">Your site will be live at <span style="color:var(--accent2);font-family:monospace;font-size:12px;">bolthost.vercel.app/slug</span></p>
+
+          <div class="form-group">
+            <label class="form-label" for="site-name-input">site name</label>
+            <input class="form-input" id="site-name-input" type="text" placeholder="My Awesome Site" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="site-slug-input">url slug</label>
+            <input class="form-input" id="site-slug-input" type="text" placeholder="my-awesome-site" autocomplete="off" />
+            <div class="url-preview">
+              bolthost.vercel.app/<span class="slug" id="slug-preview">your-site</span>
+            </div>
+          </div>
+
+          <button class="button" onclick="startCreate()" style="margin-top:8px;width:100%;justify-content:center;padding:12px;">
+            <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+              <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+            </svg>
+            continue to publish
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB: UPLOAD -->
+      <div id="tab-upload" class="tab-panel" style="display:none;">
+        <div style="max-width:580px;">
+          <h3 style="font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-0.02em;">Upload files</h3>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:24px;">Add HTML, CSS, JS, and images to your next site. Files are attached when you publish.</p>
+
+          <div class="upload-zone" id="dropzone">
+            <svg viewBox="0 0 16 16" fill="currentColor" width="32" height="32" style="color:var(--yellow);margin:0 auto;display:block;">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+              <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+            </svg>
+            <p>Click or drag files here</p>
+            <p class="hint">html · css · js · jpg · png · svg · gif</p>
+            <input type="file" id="file-input" multiple style="display:none;" accept=".html,.css,.js,.jpg,.jpeg,.png,.gif,.svg,.webp,.ico,.txt" />
+          </div>
+          <div class="file-list" id="file-list"></div>
+
+          <div style="margin-top:20px;">
+            <button class="button accent" onclick="showTab('create');document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab==='create'));">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
+              go to create site
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div><!-- /dashboard -->
+
+<!-- ══════════════════ RULES MODAL ══════════════════ -->
+<div class="modal-overlay" id="rules-modal">
+  <div class="modal">
+    <h3>⚡ Before you publish</h3>
+    <p class="modal-subtitle">Read these rules carefully. Violations result in immediate takedown.</p>
+
+    <ul class="rules-list">
+      <li>
+        <span class="rule-icon">✕</span>
+        <span><strong>No pornography or sexual content</strong> of any kind, including adult-only material.</span>
+      </li>
+      <li>
+        <span class="rule-icon">✕</span>
+        <span><strong>No content sexualizing minors</strong> in any form, ever.</span>
+      </li>
+      <li>
+        <span class="rule-icon">✕</span>
+        <span><strong>No hate speech or harassment</strong> — content targeting individuals or groups.</span>
+      </li>
+      <li>
+        <span class="rule-icon">✕</span>
+        <span><strong>No illegal activity</strong> — piracy, malware, scams, fraud, or illegal downloads.</span>
+      </li>
+      <li>
+        <span class="rule-icon">✕</span>
+        <span><strong>No spam or phishing</strong> sites designed to deceive users.</span>
+      </li>
+      <li>
+        <span class="rule-icon ok">✓</span>
+        <span>Personal projects, portfolios, and hobby sites are always welcome.</span>
+      </li>
+      <li>
+        <span class="rule-icon ok">✓</span>
+        <span>Open source projects, tools, and experiments — go for it.</span>
+      </li>
+    </ul>
+
+    <label class="agree-check">
+      <input type="checkbox" id="agree-checkbox" />
+      I have read and agree to these rules
+    </label>
+
+    <div class="modal-actions">
+      <button class="button" id="publish-btn" onclick="publishSite()" disabled style="flex:1;justify-content:center;">
+        <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+          <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+        </svg>
+        publish site
+      </button>
+      <button class="button ghost" onclick="closeModal()">cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
