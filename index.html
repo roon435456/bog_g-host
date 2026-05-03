@@ -1,47 +1,304 @@
-<div class="card">
-    <label>DESIRED URL</label>
-    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-        <span style="color: var(--secondary); margin-right: 10px;">bog-g-host.vercel.app/</span>
-        <input type="text" id="siteName" placeholder="my-site" style="margin-bottom: 0;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebHoster Studio | Production Grade</title>
+    <style>
+        :root {
+            --bg: #000000;
+            --sidebar: #0a0a0a;
+            --card: #111111;
+            --border: #333333;
+            --accent: #0070f3;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .nav-item {
+            padding: 12px;
+            border-radius: 8px;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        /* --- Main Content --- */
+        .main-studio {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 60px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            background: #050505;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            background: rgba(0, 112, 243, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--accent);
+        }
+
+        /* --- Editor Area --- */
+        .editor-container {
+            flex: 1;
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            background: #080808;
+        }
+
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tab-bar {
+            background: #1a1a1a;
+            padding: 10px 20px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            border-bottom: 1px solid var(--border);
+        }
+
+        textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #d4d4d4;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+            line-height: 1.5;
+        }
+
+        /* --- Controls Area --- */
+        .controls {
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .config-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .config-card h4 { margin-top: 0; color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; }
+
+        input[type="text"] {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--border);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        /* --- UIverse Button Integrated --- */
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            background-color: #ffffff;
+            border: none;
+            color: #000;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,255,255,0.15);
+        }
+
+        #deploy-status {
+            display: none;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #50fa7b;
+        }
+
+        .visit-link {
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-area">
+            <svg height="24" viewBox="0 0 75 65" fill="#fff"><path d="M37.5 0L75 65H0L37.5 0Z"></path></svg>
+            Studio
+        </div>
+        <div class="nav-item active">📂 Overview</div>
+        <div class="nav-item">🌐 Deployments</div>
+        <div class="nav-item">⚙️ Settings</div>
+        <div class="nav-item">📈 Analytics</div>
+        
+        <div style="margin-top: auto; color: var(--text-dim); font-size: 0.7rem;">
+            Personal Project <br>
+            <span style="color: white;">v2.0.4-Stable</span>
+        </div>
     </div>
 
-    <label>HTML / CSS / JS CODE</label>
-    <textarea id="htmlCode" rows="10" placeholder="<h1>My New Site</h1>"></textarea>
+    <div class="main-studio">
+        <header>
+            <div style="font-size: 0.9rem; font-weight: 500;">Project / <span id="display-name">untitled-site</span></div>
+            <div class="status-badge">Ready for Edge</div>
+        </header>
 
-    <label>ASSETS (OPTIONAL)</label>
-    <input type="file" id="assets" multiple style="border: 1px dashed var(--border); padding: 10px; margin-bottom: 20px;">
+        <div class="editor-container">
+            <div class="workspace">
+                <div class="tab-bar">index.html</div>
+                <textarea id="htmlInput" spellcheck="false"><html>
+  <head>
+    <style>
+      body { background: #111; color: white; display: grid; place-items: center; height: 100vh; font-family: sans-serif; }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to your new site!</h1>
+  </body>
+</html></textarea>
+            </div>
 
-    <button class="button" onclick="publishToVercel()">
-        <svg viewBox="0 0 16 16" class="bi bi-lightning-charge-fill" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
-        </svg>
-        Publish Project
-    </button>
-</div>
+            <div class="controls">
+                <div class="config-card">
+                    <h4>Deployment Config</h4>
+                    <label style="font-size: 0.75rem; color: #666;">Site Name</label>
+                    <input type="text" id="siteSlug" placeholder="my-project-name" oninput="updateLabel(this.value)">
+                    <p style="font-size: 0.7rem; color: #555;">URL: bog-g-host.vercel.app/<span id="slug-preview">...</span></p>
+                </div>
 
-<div id="status-box" style="display:none; margin-top: 20px; border: 1px solid #333; padding: 20px; border-radius: 8px;">
-    <p>🚀 Production Deployment Success!</p>
-    <a id="visitLink" href="#" style="color: #0070f3; text-decoration: none; font-weight: bold;">Visit Site →</a>
-</div>
+                <div class="config-card">
+                    <h4>Assets</h4>
+                    <input type="file" id="assets" style="font-size: 0.7rem;">
+                </div>
 
-<script>
-    function publishToVercel() {
-        const slug = document.getElementById('siteName').value.toLowerCase().replace(/ /g, '-');
-        const code = document.getElementById('htmlCode').value;
-        
-        if(!slug || !code) return alert("Fill in the blanks!");
+                <button class="button" onclick="launchSite()">
+                    <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path>
+                    </svg>
+                    Push to Production
+                </button>
 
-        // 1. Save to LocalStorage (For immediate preview)
-        localStorage.setItem(slug, code);
+                <div id="deploy-status">
+                    <div>✓ Deployment Successful</div>
+                    <a id="finalLink" class="visit-link" target="_blank">Open Live Site →</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // 2. Update UI
-        const link = document.getElementById('visitLink');
-        const fullPath = window.location.origin + "/" + slug;
-        
-        link.href = fullPath;
-        link.innerText = "Visit: " + fullPath;
-        document.getElementById('status-box').style.display = "block";
+    <script>
+        function updateLabel(val) {
+            const slug = val.toLowerCase().replace(/ /g, '-');
+            document.getElementById('display-name').innerText = slug || 'untitled-site';
+            document.getElementById('slug-preview').innerText = slug || '...';
+        }
 
-        console.log("Published " + slug + " to the edge.");
-    }
-</script>
+        function launchSite() {
+            const slug = document.getElementById('siteSlug').value.toLowerCase().replace(/ /g, '-');
+            const code = document.getElementById('htmlInput').value;
+            const status = document.getElementById('deploy-status');
+            const link = document.getElementById('finalLink');
+
+            if(!slug) { alert("Enter a site name!"); return; }
+
+            // Logic to simulate storage
+            localStorage.setItem('site_' + slug, code);
+
+            // Trigger success UI
+            status.style.display = "block";
+            const fullUrl = window.location.origin + "/" + slug;
+            link.href = "#"; // For demo, we use the blob method below
+            link.innerText = "Visit: " + slug;
+
+            link.onclick = (e) => {
+                e.preventDefault();
+                const blob = new Blob([code], {type: 'text/html'});
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+            };
+        }
+
+        // Routing Logic: If the URL is bog-g-host.vercel.app/test-site
+        window.onload = () => {
+            const path = window.location.pathname.substring(1);
+            const savedCode = localStorage.getItem('site_' + path);
+            if(path && savedCode) {
+                document.open();
+                document.write(savedCode);
+                document.close();
+            }
+        }
+    </script>
+</body>
+</html>
