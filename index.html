@@ -5,90 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bog-Cool</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #0a0f0a; overflow: hidden; font-family: sans-serif; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #080d07; overflow: hidden; font-family: sans-serif; }
         
-        /* Video Container */
+        /* Video Container - Interaction locked by default */
         .video-wrapper {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; /* Restricted interaction */
+            pointer-events: none; 
         }
-        .video-wrapper.active { pointer-events: auto; }
+        /* Unlocked when ';' is pressed */
+        .video-wrapper.interactable { pointer-events: auto; }
+
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         /* Bog Green UI */
         .flex { display: flex; align-items: center; gap: 5px; }
         .outer-cont {
-            display: none; /* Hidden by default */
+            display: none; /* Hidden until number key press */
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             padding: 12px 20px; border: none; font-size: 1rem; cursor: pointer;
-            background: linear-gradient(90deg, #2d4c1e, #4b632d, #1a2e15); /* Bog Green */
-            border-radius: 12px; color: #d4e0c0; transition: all 0.3s ease;
-            box-shadow: inset 0px 0px 5px #ffffff44, inset 0px 35px 30px #050805, 0px 5px 15px #000;
+            background: linear-gradient(90deg, #1b3012, #3a5024, #0f1a0b); 
+            border-radius: 12px; color: #a5c291; transition: all 0.3s ease;
+            box-shadow: inset 0px 0px 8px #ffffff22, inset 0px 35px 30px #020502, 0px 8px 20px #000;
             text-shadow: 1px 1px 2px #000; z-index: 100;
         }
-        /* Leaves and Vines decoration */
-        .outer-cont::after {
-            content: "🌿"; position: absolute; top: -10px; right: -5px; font-size: 1.2rem;
-        }
-        .outer-cont::before {
-            content: "🍃"; position: absolute; bottom: -8px; left: -5px; font-size: 1.2rem;
-        }
+
+        /* Vine & Leaf Accents */
+        .outer-cont::after { content: "🌿"; position: absolute; top: -12px; right: -8px; font-size: 1.3rem; filter: sepia(0.5) hue-rotate(60deg); }
+        .outer-cont::before { content: "🍃"; position: absolute; bottom: -10px; left: -10px; font-size: 1.1rem; opacity: 0.8; }
 
         /* API Modal */
         #api-modal {
-            display: none; position: fixed; inset: 0; background: rgba(10, 20, 10, 0.95);
-            color: #8da37e; flex-direction: column; align-items: center; justify-content: center; z-index: 1000;
+            display: none; position: fixed; inset: 0; background: rgba(5, 12, 5, 0.98);
+            color: #7a9468; flex-direction: column; align-items: center; justify-content: center; z-index: 1000;
         }
-        pre { background: #1a2518; padding: 20px; border-radius: 8px; max-width: 80%; overflow-x: auto; border: 1px solid #3d5236; }
-        .copy-btn { margin-top: 10px; padding: 10px 20px; cursor: pointer; background: #3d5236; color: white; border: none; border-radius: 5px; }
+        pre { background: #0c140a; padding: 20px; border: 1px solid #2d4224; border-radius: 8px; max-width: 85%; color: #9bb58a; overflow-x: auto; }
+        .copy-btn { margin-top: 15px; padding: 10px 25px; cursor: pointer; background: #2d4224; color: #d4e0c0; border: 1px solid #3d5236; border-radius: 6px; }
     </style>
 </head>
 <body>
 
     <div class="video-wrapper" id="vid-wrap">
         <div class="video-container">
-            <iframe id="js_video_iframe" src="https://jumpshare.com/embed/lM0ppZdwndu5Jyr5JNGf?autoplay=1&loop=1" frameborder="0" allowfullscreen></iframe>
+            <iframe id="js_video_iframe" 
+                src="https://jumpshare.com/embed/lM0ppZdwndu5Jyr5JNGf?autoplay=1&loop=1" 
+                frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            </iframe>
         </div>
     </div>
 
-    <div class="outer-cont flex" id="api-trigger" onclick="showAPI()">
+    <div class="outer-cont flex" id="api-trigger" onclick="openAPI()">
         <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
         </svg>
-        API Interface
+        Access API
     </div>
 
     <div id="api-modal">
-        <h3>Embed Code</h3>
-        <pre id="code-block">&lt;div style="position: relative; padding-bottom: 56.25%; height: 0;"&gt;&lt;iframe src="https://jumpshare.com/embed/lM0ppZdwndu5Jyr5JNGf" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"&gt;&lt;/iframe&gt;&lt;/div&gt;</pre>
+        <p>Drop this HTML anywhere to embed the Bog Loop:</p>
+        <pre id="embed-code">&lt;div style="position: relative; padding-bottom: 56.25%; height: 0;"&gt;&lt;iframe src="https://jumpshare.com/embed/lM0ppZdwndu5Jyr5JNGf?autoplay=1&amp;loop=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;</pre>
         <button class="copy-btn" onclick="copyCode()">Copy Code</button>
-        <button class="copy-btn" style="background:transparent" onclick="location.reload()">Back</button>
+        <button class="copy-btn" style="background: transparent; border: none; opacity: 0.5;" onclick="location.reload()">[ Close ]</button>
     </div>
 
     <script>
-        const btn = document.getElementById('api-trigger');
-        const wrap = document.getElementById('vid-wrap');
+        const apiBtn = document.getElementById('api-trigger');
+        const vidWrap = document.getElementById('vid-wrap');
 
         window.addEventListener('keydown', (e) => {
-            // Show API button if any number is pressed
-            if (e.key >= '0' && e.key <= '9') {
-                btn.style.display = 'flex';
+            // Unhide button if any number (0-9) is pressed
+            if (/[0-9]/.test(e.key)) {
+                apiBtn.style.display = 'flex';
             }
-            // Toggle interaction with semicolon
+            // Toggle video interaction with ';'
             if (e.key === ';') {
-                wrap.classList.toggle('active');
+                vidWrap.classList.toggle('interactable');
             }
         });
 
-        function showAPI() {
+        function openAPI() {
             document.getElementById('api-modal').style.display = 'flex';
         }
 
         function copyCode() {
-            const code = document.getElementById('code-block').innerText;
-            navigator.clipboard.writeText(code);
-            alert("Code copied to clipboard!");
+            const code = document.getElementById('embed-code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Bog Code Copied.");
+            });
         }
     </script>
 </body>
