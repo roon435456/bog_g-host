@@ -3,104 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bog Nuke Preview</title>
+    <title>Bog-Cool</title>
     <style>
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow: hidden; background: #0a1205; font-family: sans-serif;
+        body, html { margin: 0; padding: 0; height: 100%; background: #0a0f0a; overflow: hidden; font-family: sans-serif; }
+        
+        /* Video Container */
+        .video-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; /* Restricted interaction */
         }
+        .video-wrapper.active { pointer-events: auto; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* Video Layer */
-        #bg-video {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; pointer-events: none;
-        }
-
-        /* Hidden API Button Container */
-        #api-container {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            display: none; z-index: 10;
-        }
-
-        /* Bog Green UI Styling */
+        /* Bog Green UI */
         .flex { display: flex; align-items: center; gap: 5px; }
         .outer-cont {
+            display: none; /* Hidden by default */
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             padding: 12px 20px; border: none; font-size: 1rem; cursor: pointer;
-            position: relative; border-radius: 12px; color: #d4e0c0;
-            transition: all 0.3s ease;
-            /* Bog Gradient & Text Shadow */
-            background: linear-gradient(90deg, #2d4c1e, #4a6333, #1b300a);
-            box-shadow: inset 0px 0px 8px #7a9460a9, inset 0px 35px 30px #050a02, 
-                        0px 10px 20px #000, 0px 0px 15px #3e5c26; /* Vine-like glow */
-            text-shadow: 2px 2px 2px #000;
+            background: linear-gradient(90deg, #2d4c1e, #4b632d, #1a2e15); /* Bog Green */
+            border-radius: 12px; color: #d4e0c0; transition: all 0.3s ease;
+            box-shadow: inset 0px 0px 5px #ffffff44, inset 0px 35px 30px #050805, 0px 5px 15px #000;
+            text-shadow: 1px 1px 2px #000; z-index: 100;
         }
-
-        /* Vine/Leaf Effect Pseudo-element */
+        /* Leaves and Vines decoration */
         .outer-cont::after {
-            content: "🌿"; position: absolute; top: -10px; right: -5px; font-size: 1.2rem; opacity: 0.7;
+            content: "🌿"; position: absolute; top: -10px; right: -5px; font-size: 1.2rem;
+        }
+        .outer-cont::before {
+            content: "🍃"; position: absolute; bottom: -8px; left: -5px; font-size: 1.2rem;
         }
 
-        /* Modal for Code */
-        #code-modal {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-            color: #55efc4; padding: 20px; z-index: 20; overflow: auto;
+        /* API Modal */
+        #api-modal {
+            display: none; position: fixed; inset: 0; background: rgba(10, 20, 10, 0.95);
+            color: #8da37e; flex-direction: column; align-items: center; justify-content: center; z-index: 1000;
         }
-        pre { background: #111; padding: 15px; border-radius: 8px; white-space: pre-wrap; word-break: break-all; }
-        .copy-btn { background: #4a6333; color: white; border: none; padding: 8px; cursor: pointer; border-radius: 4px; }
+        pre { background: #1a2518; padding: 20px; border-radius: 8px; max-width: 80%; overflow-x: auto; border: 1px solid #3d5236; }
+        .copy-btn { margin-top: 10px; padding: 10px 20px; cursor: pointer; background: #3d5236; color: white; border: none; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-    <video id="bg-video" autoplay loop muted playsinline>
-        <source src="bog-nuke.mp4" type="video/source">
-        </video>
-
-    <div id="api-container">
-        <div class="outer-cont flex" id="api-btn">
-            <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.807 2.36a4 4 0 0 0 2.276 2.411l2.36.806c1.75.598 1.803 3.016.16 3.725l-2.36.807a4 4 0 0 0-2.412 2.276l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
-            </svg>
-            API Access
+    <div class="video-wrapper" id="vid-wrap">
+        <div class="video-container">
+            <iframe id="js_video_iframe" src="https://jumpshare.com/embed/lM0ppZdwndu5Jyr5JNGf?autoplay=1&loop=1" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div id="code-modal">
-        <button class="copy-btn" onclick="copyCode()">Copy HTML Code</button>
-        <button class="copy-btn" onclick="document.getElementById('code-modal').style.display='none'">Close</button>
-        <pre id="embed-code"></pre>
+    <div class="outer-cont flex" id="api-trigger" onclick="showAPI()">
+        <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
+        </svg>
+        API Interface
+    </div>
+
+    <div id="api-modal">
+        <h3>Embed Code</h3>
+        <pre id="code-block">&lt;div style="position: relative; padding-bottom: 56.25%; height: 0;"&gt;&lt;iframe src="https://jumpshare.com/embed/lM0ppZdwndu5Jyr5JNGf" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"&gt;&lt;/iframe&gt;&lt;/div&gt;</pre>
+        <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+        <button class="copy-btn" style="background:transparent" onclick="location.reload()">Back</button>
     </div>
 
     <script>
-        const video = document.getElementById('bg-video');
-        const apiCont = document.getElementById('api-container');
-        const modal = document.getElementById('code-modal');
-        const codeDisplay = document.getElementById('embed-code');
+        const btn = document.getElementById('api-trigger');
+        const wrap = document.getElementById('vid-wrap');
 
-        // Toggle UI with numbers
         window.addEventListener('keydown', (e) => {
+            // Show API button if any number is pressed
             if (e.key >= '0' && e.key <= '9') {
-                apiCont.style.display = 'block';
+                btn.style.display = 'flex';
             }
-            
-            // Video Controls with ';'
+            // Toggle interaction with semicolon
             if (e.key === ';') {
-                if (video.paused) video.play(); else video.pause();
+                wrap.classList.toggle('active');
             }
-            if (e.key === 'ArrowRight' && apiCont.style.display === 'block') video.currentTime += 5;
-            if (e.key === 'ArrowLeft' && apiCont.style.display === 'block') video.currentTime -= 5;
         });
 
-        const embedHTML = `<iframe src="https://boggg.amango.org/" style="position:fixed; top:0; left:0; width:100%; height:100%; border:none;"></iframe>`;
-
-        document.getElementById('api-btn').onclick = () => {
-            codeDisplay.innerText = embedHTML;
-            modal.style.display = 'block';
-        };
+        function showAPI() {
+            document.getElementById('api-modal').style.display = 'flex';
+        }
 
         function copyCode() {
-            navigator.clipboard.writeText(embedHTML);
-            alert("Code copied!");
+            const code = document.getElementById('code-block').innerText;
+            navigator.clipboard.writeText(code);
+            alert("Code copied to clipboard!");
         }
     </script>
 </body>
