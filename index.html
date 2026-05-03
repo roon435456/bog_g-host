@@ -3,46 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bog Studio | Vercel Hosting</title>
+    <title>Bog Studio | Vercel + GitHub</title>
     <style>
         :root {
-            --bog-black: #0a0d0a;
             --bog-dark: #1a241a;
             --bog-moss: #2d3d2d;
             --bog-green: #4f6b4f;
             --bog-leaf: #78a85d;
-            --vine-color: #3a5335;
+            --vine-accent: #3a5335;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bog-black);
+            background-color: var(--bog-dark);
             color: #e0eadd;
+            height: 100vh;
             overflow: hidden;
         }
 
-        /* --- UIVERSE ADAPTATION (BOG GREEN VERSION) --- */
-        .flex { display: flex; align-items: center; gap: 8px; }
+        /* --- LANDING PAGE --- */
+        #landing-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: radial-gradient(circle at center, #2d3d2d 0%, #1a241a 100%);
+            text-align: center;
+        }
 
+        .vine-decoration {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            border-top: 8px solid var(--vine-accent);
+            border-radius: 0 0 50% 50%;
+            opacity: 0.5;
+        }
+
+        /* Uiverse UI Adaptation */
+        .flex { display: flex; align-items: center; gap: 8px; }
+        
         .outer-cont {
-            padding: 12px 24px;
+            padding: 15px 30px;
             border: none;
-            font-size: 1rem;
+            font-size: 1.2rem;
             cursor: pointer;
             position: relative;
-            /* Changed from neon to Bog Greens */
-            background: linear-gradient(90deg, #3a5335, #78a85d, #4f6b4f);
+            background: linear-gradient(90deg, #2d4d2d, #4f6b4f, #1a2e1a);
             border-radius: 12px;
             color: #fff;
             transition: all 0.3s ease;
-            box-shadow:
-                inset 0px 0px 5px #ffffff44,
-                inset 0px 35px 30px #000,
-                0px 5px 10px #000000cc;
-            text-shadow: 1px 1px 1px #000;
+            box-shadow: inset 0px 0px 5px #ffffff44, inset 0px 35px 30px #000000aa, 0px 5px 15px #000;
+            text-shadow: 1px 1px 2px #000;
+            z-index: 10;
         }
 
         .outer-cont::before {
@@ -53,349 +70,274 @@
             border-radius: 12px;
             filter: blur(0);
             z-index: -1;
-            background: conic-gradient(
-                #00000000 80deg,
-                var(--bog-leaf),
-                var(--vine-color),
-                var(--bog-green),
-                #00000000 280deg
-            );
+            background: conic-gradient(#00000000 80deg, var(--bog-leaf), #3a5335, var(--bog-green), #00000000 280deg);
             transition: all 0.3s ease;
         }
 
         .outer-cont:hover::before { filter: blur(15px); }
 
-        /* --- LANDING PAGE --- */
-        #landing-page {
+        /* --- STUDIO WORKSPACE --- */
+        #studio-workspace {
+            display: none;
+            grid-template-columns: 250px 1fr;
+            height: 100vh;
+            border: 10px solid var(--vine-accent);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .sidebar {
+            background: var(--bog-moss);
+            border-right: 2px solid var(--bog-dark);
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: radial-gradient(circle, var(--bog-dark) 0%, var(--bog-black) 100%);
-            text-align: center;
-            padding: 20px;
+            gap: 10px;
         }
 
-        #landing-page h1 {
-            font-size: 3rem;
-            color: var(--bog-leaf);
-            margin-bottom: 10px;
+        .file-item {
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .vine-decoration {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background-image: url('https://www.transparenttextures.com/patterns/leaf.png');
-            opacity: 0.1;
-            pointer-events: none;
-        }
+        .file-item:hover { background: var(--bog-leaf); color: white; }
 
-        #site-name-input {
-            background: var(--bog-moss);
-            border: 2px solid var(--vine-color);
-            color: var(--bog-leaf);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            width: 300px;
-            text-align: center;
-            outline: none;
-        }
-
-        /* --- STUDIO AREA --- */
-        #studio {
-            display: none;
-            grid-template-columns: 280px 1fr;
-            height: 100vh;
-        }
-
-        /* Sidebar with Vines */
-        .sidebar {
-            background: var(--bog-dark);
-            border-right: 2px solid var(--vine-color);
+        .editor-area {
+            background: #111;
             display: flex;
             flex-direction: column;
             padding: 20px;
             position: relative;
         }
 
-        .sidebar::after {
-            content: "🌿";
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .file-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        .file-item {
-            padding: 10px;
-            margin-bottom: 5px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .file-item:hover { background: var(--bog-moss); }
-
-        .upload-btn {
-            margin-top: auto;
-            padding: 10px;
-            background: var(--vine-color);
-            color: white;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        /* Editor Area */
-        .main-view {
-            display: flex;
-            flex-direction: column;
-            background: var(--bog-black);
-        }
-
         .toolbar {
-            height: 60px;
-            background: var(--bog-moss);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            border-bottom: 1px solid var(--vine-color);
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        #editor {
-            flex: 1;
+        textarea {
             width: 100%;
+            height: 100%;
             background: transparent;
-            color: #c5d1c5;
-            padding: 20px;
+            color: #78a85d;
             border: none;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 16px;
             outline: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
             resize: none;
         }
 
         #media-preview {
-            flex: 1;
             display: none;
+            width: 100%;
+            height: 100%;
             justify-content: center;
             align-items: center;
-            background: #000;
         }
 
         #media-preview img, #media-preview video {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            box-shadow: 0 0 20px var(--bog-leaf);
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Modals */
+        #create-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bog-moss);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid var(--bog-leaf);
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 0 50px #000;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid var(--bog-leaf);
+            background: #000;
+            color: var(--bog-leaf);
+            margin-bottom: 15px;
+            width: 80%;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 90;
         }
 
         .publish-btn {
-            background: #2ecc71;
+            background: var(--bog-leaf);
             color: white;
-            font-weight: bold;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 8px 15px;
             border: none;
+            border-radius: 5px;
+            font-weight: bold;
             cursor: pointer;
         }
-
-        .publish-btn:hover { background: #27ae60; }
-
-        /* Status Toast */
-        #status {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--bog-leaf);
-            padding: 15px 25px;
-            border-radius: 8px;
-            display: none;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp { from { transform: translateY(100px); } to { transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="vine-decoration"></div>
-
     <div id="landing-page">
-        <h1>Bog Studio</h1>
-        <p style="margin-bottom: 30px; opacity: 0.8;">Rooted hosting for your GitHub projects.</p>
-        
-        <input type="text" id="site-name-input" placeholder="enterthename" maxlength="20">
-        
-        <button class="outer-cont flex" onclick="createSite()">
+        <div class="vine-decoration"></div>
+        <h1 style="color: var(--bog-leaf); font-size: 3rem;">Bog Studio</h1>
+        <p>Direct Vercel + GitHub Hosting</p>
+        <br>
+        <button class="outer-cont flex" onclick="openModal()">
             <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none">
-                    <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
+                  <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
                 </g>
             </svg>
             Create Studio
         </button>
     </div>
 
-    <div id="studio">
-        <div class="sidebar">
-            <h2 id="display-site-name" style="color: var(--bog-leaf);">bog-site</h2>
-            <p style="font-size: 0.8rem; opacity: 0.5;">GITHUB REPO: CONNECTED</p>
-            
-            <ul class="file-list" id="file-list">
-                </ul>
+    <div class="overlay" id="overlay"></div>
+    <div id="create-modal">
+        <h3 style="color: var(--bog-leaf);">Name Your Site</h3>
+        <p style="font-size: 0.8rem; opacity: 0.7;">(Letters only, no spaces or capitals)</p>
+        <input type="text" id="site-name" placeholder="myproject" oninput="validateInput(this)">
+        <br>
+        <button class="outer-cont" onclick="launchStudio()">Initialize Studio</button>
+    </div>
 
-            <label class="upload-btn">
-                <span>Upload Assets 🍃</span>
-                <input type="file" id="file-upload" hidden multiple onchange="handleUpload(this)">
+    <div id="studio-workspace">
+        <div class="sidebar">
+            <h3 id="display-site-name" style="color: var(--bog-leaf);">project</h3>
+            <hr style="width:100%; border: 1px solid var(--bog-dark)">
+            <div id="file-list">
+                <div class="file-item" onclick="viewFile('index.html')">📄 index.html</div>
+            </div>
+            <label class="file-item" style="margin-top: 20px; text-align: center; background: var(--vine-accent);">
+                📤 Upload Assets
+                <input type="file" id="uploader" hidden onchange="handleUpload(this)">
             </label>
         </div>
-
-        <div class="main-view">
+        <div class="editor-area">
             <div class="toolbar">
-                <span id="current-filename">Editing: index.html</span>
-                <button class="publish-btn" onclick="publish()">Publish to Vercel</button>
+                <span id="file-title">Editing: index.html</span>
+                <button class="publish-btn" onclick="publishSite()">Publish</button>
             </div>
-            
-            <textarea id="editor"></textarea>
-            
-            <div id="media-preview">
-                </div>
+            <textarea id="editor"><!DOCTYPE html>
+<html>
+<head>
+    <title>Bog Site</title>
+</head>
+<body style="background:#1a241a; color:#78a85d; font-family:sans-serif;">
+    <h1>Welcome to the Bog</h1>
+    <p>Your site is ready for Vercel.</p>
+</body>
+</html></textarea>
+            <div id="media-preview"></div>
         </div>
     </div>
 
-    <div id="status">Deploying to Vercel... 🌿</div>
-
     <script>
-        let siteName = "";
+        const landing = document.getElementById('landing-page');
+        const studio = document.getElementById('studio-workspace');
+        const modal = document.getElementById('create-modal');
+        const overlay = document.getElementById('overlay');
+        const siteInput = document.getElementById('site-name');
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('media-preview');
+
         let files = {
-            "index.html": {
-                type: 'text',
-                content: '<!DOCTYPE html>\n<html>\n<head>\n  <title>Welcome</title>\n</head>\n<body style="background: #1a241a; color: #78a85d;">\n  <h1>Welcome to my Bog site!</h1>\n</body>\n</html>'
-            }
+            "index.html": { type: "text", content: "" }
         };
-        let activeFile = "index.html";
 
-        // Restriction: Only letters
-        document.getElementById('site-name-input').addEventListener('input', function(e) {
-            this.value = this.value.toLowerCase().replace(/[^a-z]/g, '');
-        });
-
-        function createSite() {
-            const input = document.getElementById('site-name-input').value;
-            if(!input) return alert("Please name your swamp!");
-            
-            siteName = input;
-            document.getElementById('display-site-name').innerText = siteName;
-            document.getElementById('landing-page').style.display = 'none';
-            document.getElementById('studio').style.display = 'grid';
-            
-            renderFileList();
-            openFile('index.html');
+        function openModal() {
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
         }
 
-        function renderFileList() {
-            const list = document.getElementById('file-list');
-            list.innerHTML = "";
-            Object.keys(files).forEach(filename => {
-                const li = document.createElement('li');
-                li.className = "file-item";
-                li.innerHTML = `<span>📄</span> ${filename}`;
-                li.onclick = () => openFile(filename);
-                list.appendChild(li);
-            });
+        function validateInput(input) {
+            input.value = input.value.toLowerCase().replace(/[^a-z]/g, '');
         }
 
-        function openFile(name) {
-            // Save current work
-            if (files[activeFile].type === 'text') {
-                files[activeFile].content = document.getElementById('editor').value;
-            }
-
-            activeFile = name;
-            document.getElementById('current-filename').innerText = `Viewing: ${name}`;
-            
-            const file = files[name];
-            const editor = document.getElementById('editor');
-            const preview = document.getElementById('media-preview');
-
-            if (file.type === 'text') {
-                editor.style.display = "block";
-                preview.style.display = "none";
-                editor.value = file.content;
-            } else {
-                editor.style.display = "none";
-                preview.style.display = "flex";
-                preview.innerHTML = "";
-                
-                if (file.type.startsWith('image/')) {
-                    const img = document.createElement('img');
-                    img.src = file.content;
-                    preview.appendChild(img);
-                } else if (file.type.startsWith('video/')) {
-                    const vid = document.createElement('video');
-                    vid.src = file.content;
-                    vid.controls = true;
-                    preview.appendChild(vid);
-                } else if (file.type.startsWith('audio/')) {
-                    const aud = document.createElement('audio');
-                    aud.src = file.content;
-                    aud.controls = true;
-                    preview.appendChild(aud);
-                }
-            }
+        function launchStudio() {
+            if(siteInput.value.length < 1) return alert("Enter a name!");
+            document.getElementById('display-site-name').innerText = "🌿 " + siteInput.value;
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+            landing.style.display = 'none';
+            studio.style.display = 'grid';
+            files["index.html"].content = editor.value;
         }
 
         function handleUpload(input) {
-            const uploadedFiles = Array.from(input.files);
-            uploadedFiles.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    files[file.name] = {
-                        type: file.type || 'text',
-                        content: e.target.result
-                    };
-                    renderFileList();
-                };
+            const file = input.files[0];
+            if(!file) return;
 
-                if (file.type.startsWith('text/') || file.name.endsWith('.html') || file.name.endsWith('.css')) {
-                    files[file.name] = { type: 'text' };
-                    reader.readAsText(file);
-                } else {
-                    reader.readAsDataURL(file); // For media
-                }
-            });
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                files[file.name] = {
+                    type: file.type,
+                    content: e.target.result
+                };
+                const div = document.createElement('div');
+                div.className = "file-item";
+                div.innerText = "📁 " + file.name;
+                div.onclick = () => viewFile(file.name);
+                document.getElementById('file-list').appendChild(div);
+            };
+
+            if(file.type.includes('text') || file.name.endsWith('.html') || file.name.endsWith('.css')) {
+                reader.readAsText(file);
+            } else {
+                reader.readAsDataURL(file);
+            }
         }
 
-        function publish() {
-            const status = document.getElementById('status');
-            status.style.display = "block";
-            status.innerText = "Connecting to GitHub & Vercel... 🌿";
-            
-            setTimeout(() => {
-                status.innerText = "Site live at bog-g-host.vercel.app/" + siteName;
-                setTimeout(() => {
-                    window.open(`https://bog-g-host.vercel.app/${siteName}`, '_blank');
-                }, 1000);
-            }, 2000);
+        function viewFile(name) {
+            document.getElementById('file-title').innerText = "Viewing: " + name;
+            const file = files[name];
+
+            if(file.type.includes('text') || name.endsWith('.html') || name.endsWith('.css')) {
+                preview.style.display = 'none';
+                editor.style.display = 'block';
+                editor.value = file.content;
+            } else if(file.type.includes('image')) {
+                editor.style.display = 'none';
+                preview.style.display = 'flex';
+                preview.innerHTML = `<img src="${file.content}">`;
+            } else if(file.type.includes('video')) {
+                editor.style.display = 'none';
+                preview.style.display = 'flex';
+                preview.innerHTML = `<video src="${file.content}" controls></video>`;
+            } else if(file.type.includes('audio')) {
+                editor.style.display = 'none';
+                preview.style.display = 'flex';
+                preview.innerHTML = `<audio src="${file.content}" controls></audio>`;
+            }
+        }
+
+        function publishSite() {
+            const site = siteInput.value;
+            const url = `https://bog-g-host.vercel.app/${site}`;
+            alert("Vines are growing...\n\nYour site has been published to:\n" + url);
+            window.open(url, '_blank');
         }
     </script>
 </body>
