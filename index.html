@@ -3,196 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bog-G-Host Studio</title>
+    <title>Bog Studio | Vercel + GitHub Hoster</title>
     <style>
         :root {
-            --matrix-green: #00ff41;
-            --dark-bg: #050505;
-            --panel-bg: #0d0d0d;
-            --border: #1a1a1a;
-            --text-dim: #666;
+            --bog-dark: #1a241a;
+            --bog-moss: #2d3d2d;
+            --bog-green: #4f6b4f;
+            --bog-leaf: #78a85d;
+            --vine-accent: #3a5335;
         }
 
         body, html {
-            margin: 0; padding: 0;
-            height: 100%; width: 100%;
-            background: var(--dark-bg);
-            color: white;
+            margin: 0;
+            padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bog-dark);
+            color: #e0eadd;
+            height: 100vh;
             overflow: hidden;
         }
 
-        /* --- LANDING UI --- */
+        /* --- LANDING PAGE --- */
         #landing-page {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            height: 100vh; text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: radial-gradient(circle at center, #2d3d2d 0%, #1a241a 100%);
+            text-align: center;
         }
 
-        .input-group { margin-bottom: 40px; }
-        .input-group input {
-            background: transparent; border: none;
-            border-bottom: 2px solid var(--matrix-green);
-            color: var(--matrix-green); font-size: 2rem;
-            text-align: center; outline: none; padding: 10px;
+        .vine-decoration {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, transparent);
+            border-top: 8px solid var(--vine-accent);
+            border-radius: 0 0 50% 50%;
         }
 
-        /* Uiverse Button Style */
-        .button {
-            --white: #ffe7ff; --bg: #080808; --radius: 100px;
-            outline: none; cursor: pointer; border: 0; position: relative;
-            border-radius: var(--radius); background-color: var(--bg);
-            transition: all 0.2s ease;
-            box-shadow: inset 0 0.3rem 0.9rem rgba(255, 255, 255, 0.3), inset 0 -0.1rem 0.3rem rgba(0, 0, 0, 0.7), inset 0 -0.4rem 0.9rem rgba(255, 255, 255, 0.5), 0 3rem 3rem rgba(0, 0, 0, 0.3), 0 1rem 1rem -0.6rem rgba(0, 0, 0, 0.8);
-        }
-        .button .wrap { font-size: 25px; font-weight: 500; color: rgba(255, 255, 255, 0.7); padding: 32px 45px; border-radius: inherit; position: relative; overflow: hidden; }
-        .button .wrap p span:nth-child(2) { display: none; }
-        .button:hover .wrap p span:nth-child(1) { display: none; }
-        .button:hover .wrap p span:nth-child(2) { display: inline-block; }
-        .button .wrap p { display: flex; align-items: center; gap: 12px; margin: 0; transition: all 0.2s ease; transform: translateY(2%); mask-image: linear-gradient(to bottom, white 40%, transparent); }
-        .button .wrap::before, .button .wrap::after { content: ""; position: absolute; transition: all 0.3s ease; }
-        .button .wrap::before { left: -15%; right: -15%; bottom: 25%; top: -100%; border-radius: 50%; background-color: rgba(255, 255, 255, 0.12); }
-        .button .wrap::after { left: 6%; right: 6%; top: 12%; bottom: 40%; border-radius: 22px 22px 0 0; box-shadow: inset 0 10px 8px -10px rgba(255, 255, 255, 0.8); background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%); }
-        .button:hover { box-shadow: inset 0 0.3rem 0.5rem rgba(255, 255, 255, 0.4), inset 0 -0.1rem 0.3rem rgba(0, 0, 0, 0.7), inset 0 -0.4rem 0.9rem rgba(255, 255, 255, 0.7), 0 3rem 3rem rgba(0, 0, 0, 0.3), 0 1rem 1rem -0.6rem rgba(0, 0, 0, 0.8); }
-        .button:hover .wrap::before { transform: translateY(-5%); }
-        .button:active { transform: translateY(4px); }
-
-        /* --- STUDIO UI --- */
-        #studio-page { display: none; height: 100vh; grid-template-columns: 250px 1fr; grid-template-rows: 50px 1fr; }
+        /* Uiverse UI Modified for Bog Green */
+        .flex { display: flex; align-items: center; gap: 8px; }
         
-        header { 
-            grid-column: span 2; background: var(--panel-bg); 
-            border-bottom: 1px solid var(--border); display: flex; 
-            align-items: center; padding: 0 20px; justify-content: space-between;
+        .outer-cont {
+            padding: 15px 30px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            background: linear-gradient(90deg, #2d4d2d, #4f6b4f, #1a2e1a);
+            border-radius: 12px;
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: inset 0px 0px 5px #ffffff44, inset 0px 35px 30px #000000aa, 0px 5px 15px #000;
+            text-shadow: 1px 1px 2px #000;
+            z-index: 10;
         }
 
-        .sidebar { 
-            background: var(--panel-bg); border-right: 1px solid var(--border);
-            padding: 20px 10px;
+        .outer-cont::before {
+            content: "🌿";
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            font-size: 20px;
+            filter: blur(0);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .outer-cont:hover { transform: scale(1.05); }
+
+        /* --- STUDIO INTERFACE --- */
+        #studio-workspace {
+            display: none; /* Hidden by default */
+            grid-template-columns: 250px 1fr;
+            height: 100vh;
+            border: 10px solid var(--vine-accent);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        #studio-workspace::after {
+            content: "🍃";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            opacity: 0.6;
+        }
+
+        .sidebar {
+            background: var(--bog-moss);
+            border-right: 2px solid var(--bog-dark);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .file-item {
-            padding: 8px 15px; border-radius: 4px; color: var(--text-dim);
-            cursor: pointer; font-size: 0.9rem; margin-bottom: 2px;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
         }
-        .file-item.active { background: #1a1a1a; color: var(--matrix-green); }
 
-        .editor-container { background: var(--dark-bg); position: relative; }
-        
+        .file-item:hover { background: var(--bog-leaf); color: white; }
+
+        .editor-area {
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
         textarea {
-            width: 100%; height: 100%; background: transparent;
-            border: none; color: var(--matrix-green); font-family: 'Courier New', Courier, monospace;
-            font-size: 1.1rem; padding: 20px; outline: none; resize: none; box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            color: #78a85d;
+            border: none;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            resize: none;
         }
 
-        .publish-small {
-            position: absolute; bottom: 20px; right: 20px;
-            background: var(--matrix-green); color: black;
-            padding: 10px 20px; border-radius: 5px; font-weight: bold;
-            cursor: pointer; border: none;
+        /* Modals */
+        #create-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bog-moss);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid var(--bog-leaf);
+            z-index: 100;
+            text-align: center;
         }
 
-        .visit-btn {
-            background: transparent; border: 1px solid var(--matrix-green);
-            color: var(--matrix-green); padding: 5px 15px; cursor: pointer;
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 15px;
+            width: 80%;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 90;
         }
     </style>
 </head>
 <body>
 
     <div id="landing-page">
-        <div class="input-group">
-            <input type="text" id="project-slug" placeholder="Project Name..." autocomplete="off">
-        </div>
-        
-        <button class="button" onclick="initStudio()">
-            <div class="wrap">
-              <p>
-                <span>Create New</span>
-                <span>Launch Studio</span>
-              </p>
-            </div>
+        <div class="vine-decoration"></div>
+        <h1>Bog Studio</h1>
+        <p>Deploy your swamp to Vercel & GitHub</p>
+        <br>
+        <button class="outer-cont flex" onclick="openModal()">
+            <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none">
+                  <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.06.16l.807 2.36a4 4 0 0 0 2.276 2.411l.217.081l2.36.806c1.75.598 1.803 3.016.16 3.725l-.16.06l-2.36.807a4 4 0 0 0-2.412 2.276l-.081.216l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.062-.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-.216-.081l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l.16-.062l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
+                </g>
+            </svg>
+            Create New Site
         </button>
     </div>
 
-    <div id="studio-page">
-        <header>
-            <div id="studio-title" style="color: var(--matrix-green); font-weight: bold;">STUDIO // </div>
-            <button class="visit-btn" id="open-live">Visit Live Site</button>
-        </header>
+    <div class="overlay" id="overlay"></div>
+    <div id="create-modal">
+        <h3>Name your Swamp</h3>
+        <input type="text" id="site-name" placeholder="lowercaseonly" oninput="validateInput(this)">
+        <br>
+        <button class="outer-cont" onclick="launchStudio()">Initialize Site</button>
+    </div>
 
+    <div id="studio-workspace">
         <div class="sidebar">
-            <div style="font-size: 0.7rem; color: #444; margin-bottom: 10px; padding-left: 15px;">FILES</div>
-            <div class="file-item active">index.html</div>
-            <div class="file-item">style.css</div>
-            <div class="file-item">script.js</div>
-            <div class="file-item" style="margin-top: 20px; opacity: 0.5;">+ Upload Image</div>
+            <h3 id="display-site-name">project-name</h3>
+            <hr style="width:100%; border: 1px solid var(--bog-dark)">
+            <div class="file-item" onclick="loadFile('index.html')">📄 index.html</div>
+            <div class="file-item">📁 Upload File (MP3/MP4/PNG)</div>
+            <div style="margin-top: auto; font-size: 12px; color: var(--bog-leaf);">Connected to Vercel</div>
         </div>
-
-        <div class="editor-container">
-            <textarea id="code-editor" spellcheck="false"></textarea>
-            <button class="publish-small" onclick="saveProject()">PUBLISH CHANGES</button>
+        <div class="editor-area">
+            <div id="file-title" style="margin-bottom: 10px; color: var(--bog-leaf);">Editing: index.html</div>
+            <textarea id="editor"><!DOCTYPE html>
+<html>
+<head>
+    <title>My Bog Site</title>
+</head>
+<body>
+    <h1>Welcome to the Swamp</h1>
+</body>
+</html></textarea>
         </div>
     </div>
 
     <script>
-        let currentSlug = "";
+        const landing = document.getElementById('landing-page');
+        const studio = document.getElementById('studio-workspace');
+        const modal = document.getElementById('create-modal');
+        const overlay = document.getElementById('overlay');
+        const siteInput = document.getElementById('site-name');
 
-        // Start the studio
-        function initStudio() {
-            const nameInput = document.getElementById('project-slug').value;
-            if(!nameInput) return alert("Enter a project name first!");
-
-            currentSlug = nameInput.toLowerCase().replace(/ /g, '-');
-            
-            // Set default code
-            document.getElementById('code-editor').value = `<!DOCTYPE html>
-<html>
-<head>
-    <title>${nameInput}</title>
-    <style>
-        body { background: #000; color: #00ff41; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: monospace; }
-    </style>
-</head>
-<body>
-    <h1>${nameInput.toUpperCase()} IS LIVE</h1>
-</body>
-</html>`;
-
-            // Switch UI
-            document.getElementById('landing-page').style.display = "none";
-            document.getElementById('studio-page').style.display = "grid";
-            document.getElementById('studio-title').innerText = "STUDIO // " + currentSlug;
+        function openModal() {
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
         }
 
-        // Save to "Database" (LocalStorage)
-        function saveProject() {
-            const code = document.getElementById('code-editor').value;
-            localStorage.setItem('host_' + currentSlug, code);
-            alert("Changes published to production!");
+        // Restriction: no spaces, capitals, unicodes, special characters
+        function validateInput(input) {
+            input.value = input.value.replace(/[^a-z]/g, '');
         }
 
-        // Visit Button
-        document.getElementById('open-live').onclick = () => {
-            const code = document.getElementById('code-editor').value;
-            // Using Data URI to avoid blob: prefix and show real-time changes
-            const win = window.open();
-            win.document.write(code);
-            win.document.close();
-        };
-
-        // --- THE ROUTER ---
-        // This runs if someone visits bog-g-host.vercel.app/yourname
-        window.onload = () => {
-            const path = window.location.pathname.substring(1);
-            const savedData = localStorage.getItem('host_' + path);
+        function launchStudio() {
+            if(siteInput.value.length < 1) return alert("Please name your site!");
             
-            if(path && savedData) {
-                // If a site exists, inject it and stop everything else
-                document.open();
-                document.write(savedData);
-                document.close();
-            }
+            document.getElementById('display-site-name').innerText = siteInput.value + ".bog";
+            
+            // Transition
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+            landing.style.display = 'none';
+            studio.style.display = 'grid';
+        }
+
+        function loadFile(name) {
+            document.getElementById('file-title').innerText = "Editing: " + name;
         }
     </script>
 </body>
