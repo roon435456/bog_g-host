@@ -2,117 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bog Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bog Nuke Preview</title>
     <style>
-        :root {
-            --bog-dark: #121a12;
-            --bog-moss: #223022;
-            --bog-leaf: #5e8c47;
-            --vine: #2a3d25;
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background: #0a1205; font-family: sans-serif;
         }
-        body { margin: 0; background: var(--bog-dark); color: #d1ddd1; font-family: sans-serif; overflow: hidden; }
-        
-        /* Bog-themed Uiverse UI */
-        .outer-cont {
-            padding: 12px 20px; border: none; font-size: 1rem; cursor: pointer; position: relative;
-            background: linear-gradient(90deg, #2d4d2d, #5e8c47, #1a2e1a);
-            border-radius: 12px; color: #fff; transition: all 0.3s ease;
-            box-shadow: inset 0px 0px 5px #ffffff44, inset 0px 35px 30px #000, 0px 5px 10px #000000cc;
-        }
-        .outer-cont::before {
-            content: "🌿"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: 0.3s;
-        }
-        .outer-cont:hover::before { opacity: 1; filter: blur(10px); }
 
-        #landing { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        #studio { display: none; grid-template-columns: 250px 1fr; height: 100vh; border: 5px solid var(--vine); }
-        
-        .sidebar { background: var(--bog-moss); padding: 20px; border-right: 2px solid var(--vine); }
-        .file-item { padding: 8px; margin: 5px 0; background: rgba(0,0,0,0.3); border-radius: 4px; cursor: pointer; }
-        
-        .main { display: flex; flex-direction: column; background: #080a08; }
-        .toolbar { padding: 10px; background: var(--bog-moss); display: flex; justify-content: space-between; }
-        textarea { flex: 1; background: transparent; color: var(--bog-leaf); border: none; padding: 20px; font-family: monospace; outline: none; }
-        #preview { display: none; flex: 1; justify-content: center; align-items: center; }
-        img, video { max-width: 80%; border: 2px solid var(--bog-leaf); }
+        /* Video Layer */
+        #bg-video {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; pointer-events: none;
+        }
+
+        /* Hidden API Button Container */
+        #api-container {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: none; z-index: 10;
+        }
+
+        /* Bog Green UI Styling */
+        .flex { display: flex; align-items: center; gap: 5px; }
+        .outer-cont {
+            padding: 12px 20px; border: none; font-size: 1rem; cursor: pointer;
+            position: relative; border-radius: 12px; color: #d4e0c0;
+            transition: all 0.3s ease;
+            /* Bog Gradient & Text Shadow */
+            background: linear-gradient(90deg, #2d4c1e, #4a6333, #1b300a);
+            box-shadow: inset 0px 0px 8px #7a9460a9, inset 0px 35px 30px #050a02, 
+                        0px 10px 20px #000, 0px 0px 15px #3e5c26; /* Vine-like glow */
+            text-shadow: 2px 2px 2px #000;
+        }
+
+        /* Vine/Leaf Effect Pseudo-element */
+        .outer-cont::after {
+            content: "🌿"; position: absolute; top: -10px; right: -5px; font-size: 1.2rem; opacity: 0.7;
+        }
+
+        /* Modal for Code */
+        #code-modal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            color: #55efc4; padding: 20px; z-index: 20; overflow: auto;
+        }
+        pre { background: #111; padding: 15px; border-radius: 8px; white-space: pre-wrap; word-break: break-all; }
+        .copy-btn { background: #4a6333; color: white; border: none; padding: 8px; cursor: pointer; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-<div id="landing">
-    <h1 style="color: var(--bog-leaf)">Bog Studio</h1>
-    <input type="text" id="siteName" placeholder="sitename" style="padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
-    <button class="outer-cont" onclick="initStudio()">Create Studio</button>
-</div>
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="bog-nuke.mp4" type="video/source">
+        </video>
 
-<div id="studio">
-    <div class="sidebar">
-        <h3>Files 🍃</h3>
-        <div id="fileList">
-            <div class="file-item" onclick="showFile('index.html')">index.html</div>
+    <div id="api-container">
+        <div class="outer-cont flex" id="api-btn">
+            <svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.107 5.448c.598-1.75 3.016-1.803 3.725-.159l.807 2.36a4 4 0 0 0 2.276 2.411l2.36.806c1.75.598 1.803 3.016.16 3.725l-2.36.807a4 4 0 0 0-2.412 2.276l-.806 2.361c-.598 1.75-3.016 1.803-3.724.16l-.806-2.36a4 4 0 0 0-2.276-2.412l-2.36-.806c-1.751-.598-1.804-3.016-.16-3.724l2.36-.806A4 4 0 0 0 8.22 8.025l.081-.216z" fill="currentColor"></path>
+            </svg>
+            API Access
         </div>
-        <input type="file" id="uploader" hidden onchange="uploadFile()">
-        <button class="outer-cont" style="width:100%; margin-top:20px;" onclick="document.getElementById('uploader').click()">Upload</button>
     </div>
-    <div class="main">
-        <div class="toolbar">
-            <span id="curFile">index.html</span>
-            <button class="outer-cont" onclick="publish()">Publish</button>
-        </div>
-        <textarea id="editor"></textarea>
-        <div id="preview"></div>
+
+    <div id="code-modal">
+        <button class="copy-btn" onclick="copyCode()">Copy HTML Code</button>
+        <button class="copy-btn" onclick="document.getElementById('code-modal').style.display='none'">Close</button>
+        <pre id="embed-code"></pre>
     </div>
-</div>
 
-<script>
-    let currentSite = "";
-    let files = {"index.html": "<h1>My Bog Site</h1>"};
+    <script>
+        const video = document.getElementById('bg-video');
+        const apiCont = document.getElementById('api-container');
+        const modal = document.getElementById('code-modal');
+        const codeDisplay = document.getElementById('embed-code');
 
-    function initStudio() {
-        currentSite = document.getElementById('siteName').value.toLowerCase().replace(/[^a-z]/g, '');
-        if(!currentSite) return;
-        document.getElementById('landing').style.display = 'none';
-        document.getElementById('studio').style.display = 'grid';
-        document.getElementById('editor').value = files["index.html"];
-    }
-
-    async function uploadFile() {
-        const file = document.getElementById('uploader').files[0];
-        const formData = new FormData();
-        formData.append("file", file);
-        // FastAPI call
-        await fetch(`/upload/${currentSite}`, {method: "POST", body: formData});
-        
-        const item = document.createElement('div');
-        item.className = 'file-item';
-        item.innerText = file.name;
-        item.onclick = () => showFile(file.name, true, file.type);
-        document.getElementById('fileList').appendChild(item);
-    }
-
-    function showFile(name, isMedia = false, type = "") {
-        document.getElementById('curFile').innerText = name;
-        if(isMedia && !type.includes('html')) {
-            document.getElementById('editor').style.display = 'none';
-            document.getElementById('preview').style.display = 'flex';
-            const url = `https://bog-g-host.vercel.app/${currentSite}/${name}`;
-            document.getElementById('preview').innerHTML = type.includes('video') ? `<video src="${url}" controls>` : `<img src="${url}">`;
-        } else {
-            document.getElementById('editor').style.display = 'block';
-            document.getElementById('preview').style.display = 'none';
-        }
-    }
-
-    async function publish() {
-        const code = document.getElementById('editor').value;
-        await fetch(`/publish/${currentSite}`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({html: code})
+        // Toggle UI with numbers
+        window.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') {
+                apiCont.style.display = 'block';
+            }
+            
+            // Video Controls with ';'
+            if (e.key === ';') {
+                if (video.paused) video.play(); else video.pause();
+            }
+            if (e.key === 'ArrowRight' && apiCont.style.display === 'block') video.currentTime += 5;
+            if (e.key === 'ArrowLeft' && apiCont.style.display === 'block') video.currentTime -= 5;
         });
-        window.open(`https://bog-g-host.vercel.app/${currentSite}`, '_blank');
-    }
-</script>
+
+        const embedHTML = `<iframe src="https://boggg.amango.org/" style="position:fixed; top:0; left:0; width:100%; height:100%; border:none;"></iframe>`;
+
+        document.getElementById('api-btn').onclick = () => {
+            codeDisplay.innerText = embedHTML;
+            modal.style.display = 'block';
+        };
+
+        function copyCode() {
+            navigator.clipboard.writeText(embedHTML);
+            alert("Code copied!");
+        }
+    </script>
 </body>
 </html>
